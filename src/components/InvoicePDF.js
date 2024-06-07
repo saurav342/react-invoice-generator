@@ -39,7 +39,7 @@ const App = ({invoiceData, setFillForm}) => {
       console.log(imgData)
       const max = {height:300,width:210}
 
-      let height=imgData.height, width=imgData.width, src=imgData.src, ratio=imgData.height/imgData.width;
+      let height=imgData.height, width=imgData.width, ratio=imgData.height/imgData.width;
         if(height>max.height||width>max.width){
             if(height>width){
                 height=max.height;
@@ -84,7 +84,7 @@ const App = ({invoiceData, setFillForm}) => {
     if (invoiceContainerRef.current) {
       handleGeneratePdf(); 
     }
-  }, [invoiceContainerRef.current]);
+  });
 
   return (
     <div className="App">

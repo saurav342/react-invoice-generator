@@ -296,7 +296,7 @@ function InvoiceForm({handleMainFormData}) {
   return (
     <div className='container'>
         <h1>Invoice Form</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
         <div className="form-group">
             <span className='title'>Seller Details</span>
         <label>

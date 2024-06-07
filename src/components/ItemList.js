@@ -71,7 +71,7 @@ const ItemList = ({itemList, taxType}) => {
                 {itemList.reduce((acc, item) => acc + calculateTaxAmount(item), 0)}
               </td>
               {/* Display total discount If discount !=0 */}
-              {total_discount==0 ? null : <td className={styles.totals}>{total_discount}</td>}
+              {total_discount===0 ? null : <td className={styles.totals}>{total_discount}</td>}
               <td className={styles.totals}>
                 {total_amount}
               </td>

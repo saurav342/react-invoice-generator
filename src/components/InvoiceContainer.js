@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import SellerDetails from './SellerDetails';
 import BillingDetails from './BillingDetails';
@@ -11,7 +11,7 @@ import logo from '../logo.png';
 import styles from '../styles/invoiceContainer.module.css';
 const InvoiceContainer = ({invoiceData}) => {
   let taxType = "";
-  if (invoiceData.placeOfSupply == invoiceData.placeOfDelivery){
+  if (invoiceData.placeOfSupply === invoiceData.placeOfDelivery){
         taxType = "CGST + SGST";
     }
     else {
