@@ -36,7 +36,6 @@ const App = ({invoiceData, setFillForm}) => {
       });
 
       const imgData = canvas.toDataURL('image/png');
-      console.log(imgData)
       const max = {height:300,width:210}
 
       let height=imgData.height, width=imgData.width, ratio=imgData.height/imgData.width;
@@ -66,9 +65,6 @@ const App = ({invoiceData, setFillForm}) => {
           },
       });
 
-      
-    //   pdf.text('Invoice', pdf.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
-      console.log(pdf.internal.pageSize.getWidth(),pdf.internal.pageSize.getHeight())
       // Add the invoice component content as an image
       pdf.addImage(imgData, 'PNG', 0, 0, width, height);
 

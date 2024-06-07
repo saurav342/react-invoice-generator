@@ -197,25 +197,21 @@ function InvoiceForm({handleMainFormData}) {
 };
   const handleAddressSellerChange = (event) => {
     const { name, value } = event.target;
-    console.log(name,value)
     setFormData((prevFormData) => ({ ...prevFormData, sellerDetails: {...prevFormData.sellerDetails, address: {...prevFormData.sellerDetails.address,[name]:value} } }));
     
 };
   const handleBillingAddressChange = (event) => {
     const { name, value } = event.target;
-    console.log(name,value)
     setFormData((prevFormData) => ({ ...prevFormData, billingDetails: {...prevFormData.billingDetails, address: {...prevFormData.billingDetails.address,[name]:value} } }));
     
 };
   const handleShippingAddressChange = (event) => {
     const { name, value } = event.target;
-    console.log(name,value)
     setFormData((prevFormData) => ({ ...prevFormData, shippingDetails: {...prevFormData.shippingDetails, address: {...prevFormData.shippingDetails.address,[name]:value} } }));
     
 };
     const handleBillingChange = (event) => {
     const { name, value } = event.target;
-    console.log(formData);
     setFormData((prevFormData) => ({ ...prevFormData, billingDetails: {...prevFormData.billingDetails, [name]: value } }));
     };
 
@@ -239,12 +235,10 @@ function InvoiceForm({handleMainFormData}) {
 
         // Get the index of the item being edited
         const index = parseInt(event.target.closest('.form-group').getAttribute('data-index'), 10);
-        // console.log(index);
         setFormData((prevFormData) => {
             const itemList = prevFormData.itemList;
             itemList[index] = { ...itemList[index], [name]: value };
-            console.log(formData)
-            return { ...prevFormData, ["itemList"]:itemList};
+            return { ...prevFormData, itemList:itemList};
         });
     };
 
