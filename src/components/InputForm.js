@@ -132,7 +132,7 @@ function Address ({address, handleChange}) {
     );
 }
 
-function InvoiceForm() {
+function InvoiceForm({handleMainFormData}) {
   const [formData, setFormData] = useState({
     sellerDetails:{
         name:"Varasiddhi Silk Exports",
@@ -181,9 +181,8 @@ function InvoiceForm() {
         invoiceDetails:"KA-4514531512-1920",
         invoiceDate:"28.10.2019",
     },
-    reverseCharge:"",
-    itemList:[],
-    signatureImage:""
+    reverseCharge:"yes",
+    itemList:[]
   });
 
   const handleChange = (event) => {
@@ -279,27 +278,9 @@ function InvoiceForm() {
 
     return isValid;
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Data Sent:",JSON.stringify(formData))
-    try {
-      const response = await fetch('http://localhost:8000/api/invoices/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error saving invoice: ${response.statusText}`);
-      }
-
-      // Handle successful response (e.g., display success message)
-      console.log('Invoice saved successfully!');
-
-    } catch (error) {
-      console.error('Error:', error);
-      // Display error message to the user
-    }
+    handleMainFormData(formData);
   };
 
   // medium for error and submit
@@ -464,19 +445,6 @@ function InvoiceForm() {
                         <option value="no">No</option>
                     </select>
                 </label>
-            </div>
-            
-            <div className="form-group">
-                <span className='title'> Signature </span>
-            <label>
-                Signature Image:
-                <input
-                type="text"
-                name="signatureImage"
-                value={formData.signatureImage}
-                onChange={handleChange}
-                />
-            </label>
             </div>
 
         <button className='success' type="submit">Save Invoice</button>

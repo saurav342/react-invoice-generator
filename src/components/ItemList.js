@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from '../styles/itemList.module.css'
 import Item from './Item'
+import signatureImage from '../sign.jpg';
 
 var numberToText = require('number2text');
 
@@ -12,7 +13,7 @@ function round(num, decimalPlaces = 0) {
   return Number(num + "e" + -decimalPlaces);
 }
 
-const ItemList = ({itemList, taxType, signatureImage}) => {
+const ItemList = ({itemList, taxType}) => {
   const calculateNetAmount = (item) => {
     const unitPrice = parseFloat(item.unitPrice) || 0; // Handle missing unitPrice
     const quantity = parseFloat(item.quantity) || 0; // Handle missing quantity

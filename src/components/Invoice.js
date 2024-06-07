@@ -1,8 +1,6 @@
 import React,{useState} from 'react'
-import InvoiceContainer from './InvoiceContainer';
+import InvoicePDF from './InvoicePDF';
 import InputForm from './InputForm';
-import axios from 'axios';
-
 import signatureImage from '../sign.jpg';
 
 const Invoice = () => {
@@ -73,13 +71,20 @@ const Invoice = () => {
     ],
     signatureImage:signatureImage
   });
+  const [fillForm,setFillForm] = useState(true);
 
-  
+  const handleMainFormData = ((data)=>{
+    setInvoiceData(data);
+    setFillForm(false);
+  });
 
   return (
     <>
-        <InvoiceContainer invoiceData={invoiceData}/>
-        {/* <InputForm /> */}
+        {fillForm?
+        <InputForm handleMainFormData={handleMainFormData}  />:
+        <InvoicePDF invoiceData={invoiceData} setFillForm={setFillForm} />
+        }
+        
     </>
   )
 }

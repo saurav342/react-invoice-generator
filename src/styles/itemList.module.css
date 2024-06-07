@@ -10,7 +10,8 @@
     border-collapse: collapse;
     font-size: 0.8rem;
     box-sizing: border-box;
-    margin: 10px;
+    margin: 10px 0px;
+    width:100%;
 }
 
 .totals {

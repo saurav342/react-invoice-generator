@@ -65,7 +65,7 @@ const InvoiceContainer = ({invoiceData}) => {
                 invoiceDate = {invoiceData.invoiceSummary.invoiceDate}
             />
         </div>
-        <ItemList itemList={invoiceData.itemList} taxType={taxType} signatureImage={invoiceData.signatureImage}/>
+        <ItemList itemList={invoiceData.itemList} taxType={taxType}/>
         <div className={styles.line}>
             <div>Whether tax is payable under reverse charge - {invoiceData.reverseCharge}</div>
         </div>
