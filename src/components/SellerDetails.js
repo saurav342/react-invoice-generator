@@ -6,8 +6,9 @@ const SellerDetails = ({name,address,pan,gstRegistrationNo}) => {
     <div className={styles.sellerDetails}>
         <span className={styles.sellerDetails__label}>Sold By:</span> {/* Bold label */}
         <span className={styles.sellerDetails__name}>{name}</span>
-        <span className={styles.sellerDetails__addressLine1}>{address.street}</span>  {/* Address line 1 */}
-        <span className={styles.sellerDetails__addressLine2}>{address.city}, {address.state}, {address.pincode}</span> {/* Address line 2 */}
+        <span className={styles.sellerDetails__addressLine1}>{address.addressLine1}</span>  {/* Address line 1 */}
+        {address.addressLine2 && <span className={styles.sellerDetails__addressLine2}>{address.addressLine2}</span>}  {/* Address line 2 */}
+        <span className={styles.sellerDetails__addressLine2}>{address.city}, {address.state}, {address.pincode}</span>
         <span className={styles.sellerDetails__countryAbbr}>{address.countryAbbr}</span>
         <span className={styles.sellerDetails__panDetails}>
             <span>Pan No:</span> {pan}

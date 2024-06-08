@@ -10,27 +10,38 @@ const Item = ({sl,itemDetails,taxType,totalDiscount}) => {
   //error checkings
     if(!itemDetails.description){
         console.error("Description is missing")
+        alert("Description is missing")
     }
     if(!itemDetails.unitPrice){
         console.error("Unit Price is missing")
+        alert("Unit Price is missing")
     }
     if(!itemDetails.quantity){
         console.error("Quantity is missing")
+        alert("Quantity is missing")
     }
     if(!itemDetails.taxRate){
         console.error("Tax Rate is missing")
+        alert("Tax Rate is missing")
     }
     if(!itemDetails.discount){
         console.error("Discount is missing")
+        alert("Discount is missing")
     }
 
     // parse checking
-    if(!parseFloat(itemDetails.unitPrice))
-        console.error("Unit Price is not a number")
-    if(!parseFloat(itemDetails.quantity))
-        console.error("Quantity is not a number")
-    if(!parseFloat(itemDetails.taxRate))
-        console.error("Tax Rate is not a number")
+    if(!parseFloat(itemDetails.unitPrice)){
+      console.error("Unit Price is not a number")
+      itemDetails.unitPrice = 0;
+    }
+    if(!parseFloat(itemDetails.quantity)){
+      console.error("Quantity is not a number")
+      alert("Quantity is not a number")
+    }
+    if(!parseFloat(itemDetails.taxRate)){
+      console.error("Tax Rate is not a number")
+      alert("Tax Rate is not a number")
+    }
     if(!parseFloat(itemDetails.discount)){
       itemDetails.discount = 0
       console.error("Discount is not a number")

@@ -73,6 +73,9 @@ const App = ({invoiceData, setFillForm}) => {
       
     } catch (error) {
       console.error('Error generating PDF:', error);
+      // alert
+      alert('An error occurred while generating the PDF. Please check the console for details.');
+
     }
   };
 

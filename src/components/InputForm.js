@@ -138,6 +138,7 @@ function InvoiceForm({handleMainFormData}) {
         name:"Varasiddhi Silk Exports",
         address:{
             addressLine1:"75, 3rd Cross, Lalbagh Road",
+            addressLine2:"Sudhama Nagar, Near Urvashi Theatre",
             city:"BENGALURU",
             state:"KARNATAKA",
             pincode:"560027",
@@ -267,9 +268,34 @@ function InvoiceForm({handleMainFormData}) {
       errors.itemList = "Please add at least one item";
     }
 
+    // check quantity,amounts of items for validation
+    formData.itemList.forEach((item, index) => {
+        if (!item.description) {
+            isValid = false;
+            errors[`itemDescription${index}`] = "Item Description is required";
+        }
+        if (!item.unitPrice) {
+            isValid = false;
+            errors[`itemUnitPrice${index}`] = "Item Unit Price is required";
+        }
+        if (!item.quantity) {
+            isValid = false;
+            errors[`itemQuantity${index}`] = "Item Quantity is required";
+        }
+        if (!item.discount) {
+            isValid = false;
+            errors[`itemDiscount${index}`] = "Item Discount is required";
+            
+        }
+        if (!item.taxRate) {
+            isValid = false;
+            errors[`itemTaxRate${index}`] = "Item Tax Rate is required";
+        }
+    });
+
     // Update state with validation errors 
     setFormData((prevFormData) => ({ ...prevFormData, errors }));
-
+    
     return isValid;
   };
   const handleSubmit = (event) => {
@@ -285,6 +311,12 @@ function InvoiceForm({handleMainFormData}) {
       handleSubmit(event); 
     } else {
       console.error("Form validation failed:", formData.errors);
+
+      // alert errors
+      if(formData.errors){
+        const errorMessage = Object.values(formData.errors).join("\n - ");
+        alert("Form Validation Errors:\n" + errorMessage);
+      }
     }
   };
   return (

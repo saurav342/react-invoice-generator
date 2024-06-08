@@ -34,19 +34,19 @@ This is a foundational implementation that might necessitate further development
 
 ## Components
 
-* **`BillingDetails`:** This component is responsible for displaying the billing address information on the invoice. It likely utilizes controlled components to manage user input for fields like address line 1, address line 2, city, state, zip code, and potentially country.
+* **`BillingDetails`:** This component is responsible for displaying the billing address information on the invoice. It utilizes controlled components to manage user input for fields like address line 1, address line 2, city, state, zip code, and country.
 
 * **`ItemList`:** This component dynamically renders a list of items included in the invoice. It might receive data as props, including item descriptions, unit prices, quantities, discounts, tax information, and net amounts. The component takes care of iterating through the data and displaying each item in a clear and organized manner.
 
-* **`InvoiceContainer`:** This component serves as the central container for the entire invoice layout. It manages the arrangement and organization of other components like `BillingDetails`, `ItemList`, `SellerDetails`, `ShippingDetails`, and potentially `InvoiceSummary`. It ensures a cohesive and well-structured invoice presentation.
+* **`InvoiceContainer`:** This component serves as the central container for the entire invoice layout. It manages the arrangement and organization of other components like `BillingDetails`, `ItemList`, `SellerDetails`, `ShippingDetails`, and `InvoiceSummary`. It ensures a cohesive and well-structured invoice presentation.
 
-* **`InvoiceForm`:** This crucial component acts as the user interface for entering invoice data. It likely includes input fields for seller information, billing and shipping addresses, invoice date, due date, and potentially additional invoice-level details. It handles form validation (optional) and manages the overall state of the application based on user input.
+* **`InvoiceForm`:** This crucial component acts as the user interface for entering invoice data. It includes input fields for seller information, billing and shipping addresses, invoice date, due date, and additional invoice-level details. It handles form validation and manages the overall state of the application based on user input.
 
-* **`InvoicePDF`:** This component plays a vital role in generating the downloadable PDF document. It leverages third-party libraries like `jsPDF` and potentially `html2canvas` to capture the visual representation of the invoice form. It translates the captured content into a PDF format, allowing users to download and share a professional-looking invoice.
+* **`InvoicePDF`:** This component plays a vital role in generating the downloadable PDF document. It leverages third-party libraries like `jsPDF` and `html2canvas` to capture the visual representation of the invoice form. It translates the captured content into a PDF format, allowing users to download and share a professional-looking invoice.
 
-* **`SellerDetails`:** Similar to `BillingDetails`, this component focuses on displaying the seller's information on the invoice. It might include fields for company name, address, PAN number, and GST registration details (if applicable).
+* **`SellerDetails`:** Similar to `BillingDetails`, this component focuses on displaying the seller's information on the invoice. It includes fields for company name, address, PAN number, and GST registration details (if applicable).
 
-* **`ShippingDetails`:** This component, if included, handles displaying the shipping address information on the invoice. It likely utilizes controlled components to manage user input for similar fields as found in `BillingDetails`.
+* **`ShippingDetails`:** This component, if included, handles displaying the shipping address information on the invoice. It utilizes controlled components to manage user input for similar fields as found in `BillingDetails`.
 
 
 ## Credits
