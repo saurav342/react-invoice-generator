@@ -35,7 +35,7 @@ const ItemList = ({itemList, taxType}) => {
     const taxAmount = calculateTaxAmount(item);
     return round(netAmount + taxAmount, 2);
   };
-  let total_discount = itemList.reduce((acc, item) => acc + calculateDiscount(item.discount), 0);
+  let total_discount = itemList.reduce((acc, item) => acc + calculateDiscount(item), 0);
   let total_amount = itemList.reduce((acc, item) => acc + calculateTotalAmount(item), 0);
   return (
     <div className={styles.itemList}>
