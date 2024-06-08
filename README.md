@@ -12,7 +12,7 @@ This React application empowers you to generate invoices programmatically based 
 
 ## Deployment and Usage
 
-This application is conveniently deployed on Netlify, a popular hosting platform. Access the live invoice generator at: [https://6663180a341a460008f68fdd--react-invoice-generator-with-form.netlify.app/](https://6663180a341a460008f68fdd--react-invoice-generator-with-form.netlify.app/)
+This application is conveniently deployed on Netlify, a popular hosting platform. Access the live invoice generator at: [Netlify](https://master--react-invoice-generator-with-form.netlify.app/)
 
 1. **Form Completion:** Fill out the invoice form with the necessary details.
 2. **Invoice Generation:** Click the "Save Invoice" button.
