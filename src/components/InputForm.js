@@ -1,482 +1,256 @@
 import React, { useState } from 'react';
-import '../styles/Form.css';
+import './InputForm.css';
 
-function ItemList ({itemList, handleChange, setFormData}) {
-    return (
-        <>
-            {itemList.map((_, index) => (
-                <div className='form-group' data-index={index}>
-                    <span className='title success'>Item {index + 1}</span>
-                    <label>
-                        Description:
-                        <input
-                            type="text"
-                            name="description"
-                            value={itemList[index].description}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label>
-                        Unit Price:
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="unitPrice"
-                            value={itemList[index].unitPrice}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label>
-                        Quantity:
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="quantity"
-                            value={itemList[index].quantity}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label>
-                        Discount:
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="discount"
-                            value={itemList[index].discount}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <label>
-                        Tax Rate:
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="taxRate"
-                            value={itemList[index].taxRate}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <button type="button" className='danger' onClick={() => setFormData((prevFormData) => ({ ...prevFormData, itemList: prevFormData.itemList.filter((_, i) => i !== index) }))}>Delete Item</button>
-                </div>
-            ))}
-            <button type="button" className='info' onClick={() => setFormData((prevFormData) => ({ ...prevFormData, itemList: [...prevFormData.itemList, {
-                description: "",
-                unitPrice: "",
-                quantity: "",
-                discount: "",
-                taxRate: ""
-            }] }))}>Add Item</button>
-        </>
-    );
-}
+const InputForm = ({ onSubmit }) => {
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split('T')[0];
 
+  const licensePlates = [
+    'KA51AK9049',
+    'KA51AK9050',
+    'KA51AK9051',
+    'KA51AK9052',
+    'KA51AK9053'
+  ];
 
-function Address ({address, handleChange}) {
-    return (
-        <>
-            <label>
-                Address Line 1:
-                <input
-                    type="text"
-                    name="addressLine1"
-                    value={address.addressLine1}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Address Line 2:
-                <input
-                    type="text"
-                    name="addressLine2"
-                    value={address.addressLine2}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                City:
-                <input
-                    type="text"
-                    name="city"
-                    value={address.city}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                State:
-                <input
-                    type="text"
-                    name="state"
-                    value={address.state}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Pincode:
-                <input
-                    type="text"
-                    name="pincode"
-                    value={address.pincode}
-                    onChange={handleChange}
-                />
-            </label>
-            <label>
-                Country Abbreviation:
-                <input
-                    type="text"
-                    name="countryAbbr"
-                    value={address.countryAbbr}
-                    onChange={handleChange}
-                />
-            </label>
-        </>
-    );
-}
-
-function InvoiceForm({handleMainFormData}) {
   const [formData, setFormData] = useState({
-    sellerDetails:{
-        name:"Varasiddhi Silk Exports",
-        address:{
-            addressLine1:"75, 3rd Cross, Lalbagh Road",
-            addressLine2:"Sudhama Nagar, Near Urvashi Theatre",
-            city:"BENGALURU",
-            state:"KARNATAKA",
-            pincode:"560027",
-            countryAbbr:"IN"
-        },
-        pan:"AAFCV1234A",
-        gstRegistrationNo:"29AACFV1234A1Z5",
+    date: today,
+    customerName: '',
+    total: '',
+    tripCharge: '',
+    gst: '',
+    paymentMethod: {
+      name: 'UPI',
+      time: ''
     },
-    billingDetails:{
-        name:"Madhu B",
-        address:{
-            addressLine1:"Eurofins IT Solutions India Pvt Ltd, 1st Floor",
-            addressLine2:"Maruti Platinum, Lakshminarayan Pura, AECS Layou",
-            city:"BENGALURU",
-            state:"KARNATAKA",
-            pincode:"560037",
-            countryAbbr:"IN",
-            utCode:"29"
-        },
+    driver: '',
+    licensePlate: licensePlates[0],
+    rideInfo: {
+      type: '',
+      distance: '',
+      duration: ''
     },
-    shippingDetails:{
-        name:"Madhu B",
-        address:{
-            addressLine1:"Eurofins IT Solutions India Pvt Ltd, 1st Floor",
-            addressLine2:"Maruti Platinum, Lakshminarayan Pura, AECS Layou",
-            city:"BENGALURU",
-            state:"KARNATAKA",
-            pincode:"560037",
-            countryAbbr:"IN",
-            utCode:"29"
-        },
+    pickup: {
+      address: ''
     },
-    placeOfDelivery:"KARNATAKA",
-    placeOfSupply:"KARNATAKA",
-    orderSummary:{
-        orderNo:"403-3258454-3258454",
-        orderDate:"28.10.2019"
-    },
-    invoiceSummary:{
-        invoiceNo:"IN-2754",
-        invoiceDetails:"KA-4514531512-1920",
-        invoiceDate:"28.10.2019",
-    },
-    reverseCharge:"yes",
-    itemList:[]
+    dropoff: {
+      address: ''
+    }
   });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-    
-  };
-  const handleSellerChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, sellerDetails: {...prevFormData.sellerDetails, [name]: value } }));
-    
-};
-  const handleAddressSellerChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, sellerDetails: {...prevFormData.sellerDetails, address: {...prevFormData.sellerDetails.address,[name]:value} } }));
-    
-};
-  const handleBillingAddressChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, billingDetails: {...prevFormData.billingDetails, address: {...prevFormData.billingDetails.address,[name]:value} } }));
-    
-};
-  const handleShippingAddressChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, shippingDetails: {...prevFormData.shippingDetails, address: {...prevFormData.shippingDetails.address,[name]:value} } }));
-    
-};
-    const handleBillingChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({ ...prevFormData, billingDetails: {...prevFormData.billingDetails, [name]: value } }));
-    };
-
-    const handleShippingChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, shippingDetails: {...prevFormData.shippingDetails, [name]: value } }));
-    };
-
-    const handleOrderChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, orderSummary: {...prevFormData.orderSummary, [name]: value } }));
-    };
-
-    const handleInvoiceChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevFormData) => ({ ...prevFormData, invoiceSummary: {...prevFormData.invoiceSummary, [name]: value } }));
-    };
-
-    const handleItemChange = (event) => {
-        const { name, value } = event.target;
-
-        // Get the index of the item being edited
-        const index = parseInt(event.target.closest('.form-group').getAttribute('data-index'), 10);
-        setFormData((prevFormData) => {
-            const itemList = prevFormData.itemList;
-            itemList[index] = { ...itemList[index], [name]: value };
-            return { ...prevFormData, itemList:itemList};
-        });
-    };
-
-    
-  
-  // thinking to implement this
-  const validateForm = () => {
-    let isValid = true;
-    const errors = {};
-
-    // Seller Details Validation
-    if (!formData.sellerDetails.name) {
-      isValid = false;
-      errors.sellerName = "Seller Name is required";
-    }
-
-    // Billing Details Validation
-    if (!formData.billingDetails.name) {
-      isValid = false;
-      errors.billingName = "Billing Name is required";
-    }
-
-    // Item List Validation 
-    if (formData.itemList.length === 0) {
-      isValid = false;
-      errors.itemList = "Please add at least one item";
-    }
-
-    // check quantity,amounts of items for validation
-    formData.itemList.forEach((item, index) => {
-        if (!item.description) {
-            isValid = false;
-            errors[`itemDescription${index}`] = "Item Description is required";
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'total') {
+      // Calculate GST (5%) and Trip Charge (95%) when total amount changes
+      const totalAmount = parseFloat(value) || 0;
+      const gst = (totalAmount * 0.05).toFixed(2);
+      const tripCharge = (totalAmount * 0.95).toFixed(2);
+      
+      setFormData(prev => ({
+        ...prev,
+        total: value,
+        gst: gst,
+        tripCharge: tripCharge
+      }));
+    } else if (name.includes('.')) {
+      const [parent, child] = name.split('.');
+      setFormData(prev => ({
+        ...prev,
+        [parent]: {
+          ...prev[parent],
+          [child]: value
         }
-        if (!item.unitPrice) {
-            isValid = false;
-            errors[`itemUnitPrice${index}`] = "Item Unit Price is required";
-        }
-        if (!item.quantity) {
-            isValid = false;
-            errors[`itemQuantity${index}`] = "Item Quantity is required";
-        }
-        if (!item.discount) {
-            isValid = false;
-            errors[`itemDiscount${index}`] = "Item Discount is required";
-            
-        }
-        if (!item.taxRate) {
-            isValid = false;
-            errors[`itemTaxRate${index}`] = "Item Tax Rate is required";
-        }
-    });
-
-    // Update state with validation errors 
-    setFormData((prevFormData) => ({ ...prevFormData, errors }));
-    
-    return isValid;
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    handleMainFormData(formData);
-  };
-
-  // medium for error and submit
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-
-    if (validateForm()) {
-      handleSubmit(event); 
+      }));
     } else {
-      console.error("Form validation failed:", formData.errors);
-
-      // alert errors
-      if(formData.errors){
-        const errorMessage = Object.values(formData.errors).join("\n - ");
-        alert("Form Validation Errors:\n" + errorMessage);
-      }
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
     }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
   return (
-    <div className='container'>
-        <h1>Invoice Form</h1>
-        <form onSubmit={handleFormSubmit}>
-        <div className="form-group">
-            <span className='title'>Seller Details</span>
-        <label>
-                Seller Name:
-                <input
-                type="text"
-                name="name"
-                value={formData.sellerDetails.name}
-                onChange={handleSellerChange}
-                />
-            </label>
-            
-            <Address address={formData.sellerDetails.address} handleChange={handleAddressSellerChange} />
-            <label>
-                Seller PAN:
-                <input
-                type="text"
-                name="pan"
-                value={formData.sellerDetails.pan}
-                onChange={handleSellerChange}
-                />
-            </label>
-            <label>
-                Seller GST Registration No:
-                <input
-                type="text"
-                name="gstRegistrationNo"
-                value={formData.sellerDetails.gstRegistrationNo}
-                onChange={handleSellerChange}
-                />
-            </label>
-            </div>
-            <div className="form-group">
-                <span className='title'>Billing Details</span>
-            <label>
-                Billing Name:
-                <input
-                type="text"
-                name="name"
-                value={formData.billingDetails.name}
-                onChange={handleBillingChange}
-                />
-            </label>
-            
-            <Address address={formData.billingDetails.address} handleChange={handleBillingAddressChange} />
-
-            </div>
-            <div className="form-group">
-            <span className='title'>Shipping Details</span>
-            <label>
-                Shipping Name:
-                <input
-                type="text"
-                name="name"
-                value={formData.shippingDetails.name}
-                onChange={handleShippingChange}
-                />
-            </label>
+    <form onSubmit={handleSubmit} className="input-form">
+      <h2>Malama GST Receipt Generator</h2>
+      
+      <div className="form-section">
+        <h3>Invoice Details</h3>
         
-            <Address address={formData.shippingDetails.address} handleChange={handleShippingAddressChange} />
-            </div>
-            <div className="form-group">
-            <span className='title'>Delivery and Supply Details</span>
-            <label>
-                Place of Delivery:
-                <input
-                type="text"
-                name="placeOfDelivery"
-                value={formData.placeOfDelivery}
-                onChange={handleChange}
-                />
-            </label>
-            <label>
-                Place of Supply:
-                <input
-                type="text"
-                name="placeOfSupply"
-                value={formData.placeOfSupply}
-                onChange={handleChange}
-                />
-            </label>
-            </div>
-            <div className="form-group">
-            <span className='title'>Order Details</span>
-            <label>
-                Order No:
-                <input
-                type="text"
-                name="orderNo"
-                value={formData.orderSummary.orderNo}
-                onChange={handleOrderChange}
-                />
-            </label>
-            <label>
-                Order Date:
-                <input
-                type="text"
-                name="orderDate"
-                value={formData.orderSummary.orderDate}
-                onChange={handleOrderChange}
-                />
-            </label>
-            </div>
-            <div className="form-group">
-            <span className='title'>Invoice Summary</span>
-            <label>
-                Invoice No:
-                <input
-                type="text"
-                name="invoiceNo"
-                value={formData.invoiceSummary.invoiceNo}
-                onChange={handleInvoiceChange}
-                />
-            </label>
-            <label>
-                Invoice Details:
-                <input
-                type="text"
-                name="invoiceDetails"
-                value={formData.invoiceSummary.invoiceDetails}
-                onChange={handleInvoiceChange}
-                />
-            </label>
-            <label>
-                Invoice Date:
-                <input
-                type="text"
-                name="invoiceDate"
-                value={formData.invoiceSummary.invoiceDate}
-                onChange={handleInvoiceChange}
-                />
-            </label>
-            </div>
-            
-            <div className='form-group'>
-                <span className='title'>Item List</span>
-                <ItemList itemList={formData.itemList} handleChange={handleItemChange} setFormData={setFormData} />
-            </div>
+        <div className="form-group-container">
+          {/* Basic Details */}
+          <div className="form-group required">
+            <label>Date:</label>
+            <input
+              type="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group required">
+            <label>Customer Name:</label>
+            <input
+              type="text"
+              name="customerName"
+              value={formData.customerName}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <div className="form-group">
-                <span className='title'> Reverse Charge </span>
-                <label>
-                    Reverse Charge:
-                    <select name="reverseCharge" className='' value={formData.reverseCharge} onChange={handleChange}>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </label>
-            </div>
+          {/* Payment Details */}
+          <div className="form-group required">
+            <label>Total Amount (₹):</label>
+            <input
+              type="number"
+              step="0.01"
+              name="total"
+              value={formData.total}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group required">
+            <label>Trip Charge (₹):</label>
+            <input
+              type="number"
+              step="0.01"
+              name="tripCharge"
+              value={formData.tripCharge}
+              onChange={handleChange}
+              required
+              readOnly
+            />
+          </div>
+          <div className="form-group required">
+            <label>GST (₹):</label>
+            <input
+              type="number"
+              step="0.01"
+              name="gst"
+              value={formData.gst}
+              onChange={handleChange}
+              required
+              readOnly
+            />
+          </div>
 
-        <button className='success' type="submit">Save Invoice</button>
-        </form>
-    </div>
+          {/* Payment Method */}
+          <div className="form-group required">
+            <label>Payment Type:</label>
+            <input
+              type="text"
+              name="paymentMethod.name"
+              value={formData.paymentMethod.name}
+              onChange={handleChange}
+              required
+              readOnly
+            />
+          </div>
+          <div className="form-group required">
+            <label>Payment Time:</label>
+            <input
+              type="time"
+              name="paymentMethod.time"
+              value={formData.paymentMethod.time}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Driver Details */}
+          <div className="form-group required">
+            <label>Driver Name:</label>
+            <input
+              type="text"
+              name="driver"
+              value={formData.driver}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group required">
+            <label>License Plate:</label>
+            <select
+              name="licensePlate"
+              value={formData.licensePlate}
+              onChange={handleChange}
+              required
+              className="form-select"
+            >
+              {licensePlates.map(plate => (
+                <option key={plate} value={plate}>
+                  {plate}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Ride Information */}
+          <div className="form-group required">
+            <label>Ride Type:</label>
+            <input
+              type="text"
+              name="rideInfo.type"
+              value={formData.rideInfo.type}
+              onChange={handleChange}
+              placeholder="e.g., Moto Saver, Malama GSTGo"
+              required
+            />
+          </div>
+          <div className="form-group required">
+            <label>Distance (km):</label>
+            <input
+              type="number"
+              step="0.01"
+              name="rideInfo.distance"
+              value={formData.rideInfo.distance}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group required">
+            <label>Duration (min):</label>
+            <input
+              type="number"
+              name="rideInfo.duration"
+              value={formData.rideInfo.duration}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Location Details - Full Width */}
+          <div className="form-group required full-width">
+            <label>Pickup Address:</label>
+            <textarea
+              name="pickup.address"
+              value={formData.pickup.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group required full-width">
+            <label>Drop-off Address:</label>
+            <textarea
+              name="dropoff.address"
+              value={formData.dropoff.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" className="submit-btn">Generate Invoice</button>
+    </form>
   );
-}
+};
 
-export default InvoiceForm;
+export default InputForm;

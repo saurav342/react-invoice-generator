@@ -1,91 +1,53 @@
-import React,{useState} from 'react'
-import InvoicePDF from './InvoicePDF';
-import InputForm from './InputForm';
-import signatureImage from '../sign.jpg';
+import React from 'react';
+import './Invoice.css';
+import BillingDetails from './BillingDetails';
+import InvoiceSummary from './InvoiceSummary';
+import RideDetails from './RideDetails';
 
-const Invoice = () => {
-  const [invoiceData, setInvoiceData] = useState({
-    sellerDetails:{
-        name:"Varasiddhi Silk Exports",
-        address:{
-            street:"75, 3rd Cross, Lalbagh Road",
-            city:"BENGALURU",
-            state:"KARNATAKA",
-            pincode:"560027",
-            countryAbbr:"IN"
-        },
-        pan:"AAFCV1234A",
-        gstRegistrationNo:"29AACFV1234A1Z5",
-    },
-    billingDetails:{
-        name:"Madhu B",
-        address:{
-            addressLine1:"Eurofins IT Solutions India Pvt Ltd, 1st Floor",
-            addressLine2:"Maruti Platinum, Lakshminarayan Pura, AECS Layou",
-            city:"BENGALURU",
-            state:"KARNATAKA",
-            pincode:"560037",
-            countryAbbr:"IN",
-            utCode:"29"
-        },
-    },
-    shippingDetails:{
-        name:"Madhu B",
-        address:{
-            addressLine1:"Eurofins IT Solutions India Pvt Ltd, 1st Floor",
-            addressLine2:"Maruti Platinum, Lakshminarayan Pura, AECS Layou",
-            city:"BENGALURU",
-            state:"KARNATAKA",
-            pincode:"560037",
-            countryAbbr:"IN",
-            utCode:"29"
-        },
-    },
-    placeOfDelivery:"KARNATAKA",
-    placeOfSupply:"KARNATAKA",
-    orderSummary:{
-        orderNo:"403-3258454-3258454",
-        orderDate:"28.10.2019"
-    },
-    invoiceSummary:{
-        invoiceNo:"IN-2754",
-        invoiceDetails:"KA-4514531512-1920",
-        invoiceDate:"28.10.2019",
-    },
-    reverseCharge:"No",
-    itemList:[
-        {
-            description:"Varasiddhi Silks Men's Formal Shirt (SH-06-42, Navy Blue,42) | B07KGF3KW8 (SH-05--42)",
-            unitPrice:"538.10",
-            quantity:"1",
-            discount:"",
-            taxRate:"5"
-        },
-        {
-            description:"Varasiddhi Silks Men's Formal Shirt (SH-06-42, Navy Blue,42) | B07KGF3KW8 (SH-05--42)",
-            unitPrice:"538.10",
-            quantity:"1",
-            discount:"",
-            taxRate:"5"
-        }
-    ],
-    signatureImage:signatureImage
-  });
-  const [fillForm,setFillForm] = useState(true);
-
-  const handleMainFormData = ((data)=>{
-    setInvoiceData(data);
-    setFillForm(false);
-  });
-
+const Invoice = ({ data }) => {
   return (
-    <>
-        {fillForm?
-        <InputForm handleMainFormData={handleMainFormData}  />:
-        <InvoicePDF invoiceData={invoiceData} setFillForm={setFillForm} />
-        }
-        
-    </>
-  )
-}
+    <div className="invoice-container">
+      <div className="invoice-header">
+        <h1>Malama GST</h1>
+        <p className="date">{data.date}</p>
+      </div>
+      
+      <div className="invoice-title">
+        <h2>Here's your receipt for your ride, {data.customerName}</h2>
+        <p className="subtitle">We hope you enjoyed your ride this evening.</p>
+      </div>
+
+      <InvoiceSummary 
+        total={data.total}
+        tripCharge={data.tripCharge}
+        gst={data.gst}
+      />
+
+      <div className="payment-section">
+        <h3>Payments</h3>
+        <div className="payment-method">
+          <img src={data.paymentMethod.icon} alt="Payment Method" />
+          <div className="payment-details">
+            <p>{data.paymentMethod.name}</p>
+            <p className="payment-time">{data.paymentMethod.time}</p>
+          </div>
+          <p className="payment-amount">₹{data.total}</p>
+        </div>
+      </div>
+
+      <RideDetails 
+        driver={data.driver}
+        licensePlate={data.licensePlate}
+        rideInfo={data.rideInfo}
+        pickup={data.pickup}
+        dropoff={data.dropoff}
+      />
+
+      <div className="invoice-footer">
+        <p>Fares are inclusive of GST. Please download the tax invoice from the trip detail page for a full tax breakdown.</p>
+      </div>
+    </div>
+  );
+};
+
 export default Invoice;

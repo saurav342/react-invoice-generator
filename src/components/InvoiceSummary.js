@@ -1,13 +1,28 @@
 import React from 'react'
-import styles from '../styles/invoiceSummary.module.css'
 
-// This component displays a summary of the invoice including invoice number, details, and date
-const InvoiceSummary = ({invoiceNo, invoiceDetails, invoiceDate}) => {
+const InvoiceSummary = ({ total, tripCharge, gst }) => {
   return (
-    <div className={styles.invoiceSummary}>
-        <div><span className={styles.label}>Invoice Number : </span> {invoiceNo} </div>
-        <div><span className={styles.label}>Invoice Details : </span> {invoiceDetails} </div>
-        <div><span className={styles.label}>Invoice Date: </span> {invoiceDate} </div>
+    <div className="invoice-summary">
+      <div className="total-section">
+        <h3>Total</h3>
+        <p className="amount">₹{total}</p>
+      </div>
+      
+      <div className="charge-details">
+        <div className="charge-item">
+          <span>Trip charge</span>
+          <span>₹{tripCharge}</span>
+        </div>
+        
+        <div className="charge-item subtotal">
+          <span>Subtotal</span>
+          <span>₹{tripCharge}</span>
+        </div>
+      </div>
+      
+      <div className="gst-notice">
+        <p>The total of ₹{total} has a GST of ₹{gst} included.</p>
+      </div>
     </div>
   )
 }
