@@ -1,6 +1,5 @@
 import React from 'react';
 import './Invoice.css';
-import BillingDetails from './BillingDetails';
 import InvoiceSummary from './InvoiceSummary';
 import RideDetails from './RideDetails';
 
