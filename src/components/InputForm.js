@@ -20,6 +20,7 @@ const InputForm = ({ onSubmit }) => {
   const initialGst = (initialTotal - initialBase).toFixed(2);
 
   const [formData, setFormData] = useState({
+    billNumber: 'BLR250116A001',
     date: today,
     customerName: 'Gautam Kumar',
     total: initialTotal,
@@ -95,6 +96,17 @@ const InputForm = ({ onSubmit }) => {
         <h3>Invoice Details</h3>
         
         <div className="form-group-container">
+          <div className="form-group required">
+            <label>Bill Number:</label>
+            <input
+              type="text"
+              name="billNumber"
+              value={formData.billNumber}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           {/* Basic Details */}
           <div className="form-group required">
             <label>Date:</label>

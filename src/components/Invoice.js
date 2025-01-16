@@ -8,10 +8,11 @@ const Invoice = ({ data }) => {
   return (
     <div className="invoice-container">
       <div className="invoice-header">
-
-        <h1>Malama Cabs</h1>
-                <img src={logo} alt="Malama Cabs Logo" />
-
+        <div className="header-left">
+          <h1>Malama Cabs</h1>
+          <p className="bill-number">Bill No: {data.billNumber}</p>
+        </div>
+        <img src={logo} alt="Malama Cabs Logo" />
         <p className="date">{data.date}</p>
       </div>
       
