@@ -1,41 +1,57 @@
 import React from 'react';
 import './Invoice.css';
-import InvoiceSummary from './InvoiceSummary';
 import RideDetails from './RideDetails';
+
+import logo from '../assets/mainlogo.png';
 
 const Invoice = ({ data }) => {
   return (
     <div className="invoice-container">
       <div className="invoice-header">
-        <h1>Malama GST</h1>
+
+        <h1>Malama Cabs</h1>
+                <img src={logo} alt="Malama Cabs Logo" />
+
         <p className="date">{data.date}</p>
       </div>
       
       <div className="invoice-title">
-        <h2>Here's your receipt for your ride, {data.customerName}</h2>
-        <p className="subtitle">We hope you enjoyed your ride this evening.</p>
+        <h2>Here is your receipt for the ride,  {data.customerName}. Thank you for choosing our service!</h2>
       </div>
 
-      <InvoiceSummary 
-        total={data.total}
-        tripCharge={data.tripCharge}
-        gst={data.gst}
-      />
+      <div className="calculation-table">
+        <table>
+          <tbody>
+            <tr>
+              <td>Trip Charge</td>
+              <td className="amount">₹{data.tripCharge}</td>
+            </tr>
+            <tr>
+              <td>GST (5%)</td>
+              <td className="amount">₹{data.gst}</td>
+            </tr>
+            <tr className="total-row">
+              <td>Total</td>
+              <td className="amount">₹{data.total}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div className="payment-section">
         <h3>Payments</h3>
         <div className="payment-method">
-          <img src={data.paymentMethod.icon} alt="Payment Method" />
+          {/* <img src={data.paymentMethod.icon} alt="Payment Method" /> */}
           <div className="payment-details">
-            <p>{data.paymentMethod.name}</p>
-            <p className="payment-time">{data.paymentMethod.time}</p>
+           Payment Method: {data.paymentMethod.name}
+            {/* <p className="payment-time">{data.paymentMethod.time}</p> */}
           </div>
-          <p className="payment-amount">₹{data.total}</p>
+          {/* <p className="payment-amount">₹{data.total}</p> */}
         </div>
       </div>
 
       <RideDetails 
-        driver={data.driver}
+        driver={data.driverName}
         licensePlate={data.licensePlate}
         rideInfo={data.rideInfo}
         pickup={data.pickup}
@@ -43,7 +59,20 @@ const Invoice = ({ data }) => {
       />
 
       <div className="invoice-footer">
-        <p>Fares are inclusive of GST. Please download the tax invoice from the trip detail page for a full tax breakdown.</p>
+        <p>Fares are inclusive of GST.</p>
+      </div>
+      <div>
+      GSTIN: 29ABOCS3648C1Z0
+      </div>
+
+      <div className="ride-details">
+        <h3>Ride Details</h3>
+        <div className="ride-info">
+          <div className="trip-timing">
+            <p>Trip Date: {data.rideInfo.tripDate}</p>
+            <p>Trip Time: {data.rideInfo.tripTime}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

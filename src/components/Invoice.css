@@ -1,40 +1,46 @@
 .invoice-container {
-  max-width: 800px;
+  padding: 60px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
 }
 
 .invoice-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
 .invoice-header h1 {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
 }
 
 .invoice-title {
-  margin-bottom: 30px;
+  margin: 40px 0;
 }
 
 .invoice-title h2 {
-  font-size: 24px;
+  font-size: 22px;
+  font-weight: 600;
   margin-bottom: 10px;
+  color: #444;
 }
 
 .subtitle {
   color: #666;
+  font-size: 16px;
 }
 
 .payment-section {
-  margin: 30px 0;
+  margin: 50px 0;
   padding: 20px 0;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .payment-method {
@@ -44,12 +50,14 @@
 }
 
 .payment-method img {
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
 }
 
 .location-details {
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 16px;
+  color: #444;
 }
 
 .location {
@@ -59,12 +67,162 @@
 }
 
 .time {
-  font-weight: bold;
+  font-weight: 600;
   min-width: 80px;
 }
 
 .invoice-footer {
-  margin-top: 40px;
-  color: #666;
-  font-size: 14px;
-} 
+  margin-top: 60px;
+  padding-top: 30px;
+  color: #555;
+  font-size: 15px;
+}
+
+.calculation-table {
+  margin: 40px 0;
+}
+
+.calculation-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calculation-table td {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.calculation-table .amount {
+  text-align: right;
+}
+
+.calculation-table .total-row {
+  font-weight: 700;
+  border-top: 2px solid #ccc;
+  font-size: 18px;
+}
+
+.gstin-number {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  color: #555;
+  font-size: 15px;
+}
+
+@media print {
+  .invoice-container {
+    padding: 40px 60px;
+    width: 1100px;
+    font-size: 14pt;
+    line-height: 1.6;
+  }
+
+  .invoice-header {
+    margin-bottom: 40px;
+  }
+
+  .invoice-header h1 {
+    font-size: 26pt;
+    color: #000;
+  }
+
+  .invoice-title h2 {
+    font-size: 18pt;
+    color: #000;
+    margin: 30px 0;
+    line-height: 1.5;
+  }
+
+  .calculation-table {
+    margin: 40px 0;
+  }
+
+  .calculation-table table {
+    width: 100%;
+  }
+
+  .calculation-table td {
+    padding: 15px;
+    font-size: 14pt;
+    color: #000;
+  }
+
+  .calculation-table .amount {
+    font-weight: 600;
+  }
+
+  .calculation-table .total-row {
+    font-weight: 800;
+    font-size: 16pt;
+  }
+
+  .payment-section h3 {
+    font-size: 16pt;
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+  .payment-method {
+    background-color: #f9f9f9 !important;
+    padding: 20px;
+    margin: 15px 0;
+  }
+
+  .payment-details {
+    font-size: 14pt;
+    color: #000;
+  }
+
+  .payment-amount {
+    font-size: 15pt;
+    font-weight: 700;
+  }
+
+  .ride-details {
+    background-color: #f9f9f9 !important;
+    padding: 25px;
+    margin: 40px 0;
+  }
+
+  .ride-details h3 {
+    font-size: 16pt;
+    color: #000;
+    margin-bottom: 20px;
+  }
+
+  .location-details p {
+    font-size: 14pt;
+    color: #000;
+    margin: 12px 0;
+  }
+
+  .driver-details {
+    margin: 25px 0;
+  }
+
+  .driver-name {
+    font-size: 14pt;
+    font-weight: 700;
+  }
+
+  .invoice-footer {
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+    font-size: 13pt;
+    color: #444;
+  }
+
+  .gstin-number {
+    margin-top: 25px;
+    font-size: 13pt;
+    color: #444;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

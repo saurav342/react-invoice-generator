@@ -13,28 +13,36 @@ const InputForm = ({ onSubmit }) => {
     'KA51AK9053'
   ];
 
+  const drivers = ["Chandan Kumar", "Jabed Lashkar",  "Muni Raju"];
+
+  const initialTotal = 599;
+  const initialBase = (initialTotal / 1.05).toFixed(2);
+  const initialGst = (initialTotal - initialBase).toFixed(2);
+
   const [formData, setFormData] = useState({
     date: today,
-    customerName: '',
-    total: '',
-    tripCharge: '',
-    gst: '',
+    customerName: 'Gautam Kumar',
+    total: initialTotal,
+    tripCharge: initialBase,
+    gst: initialGst,
     paymentMethod: {
       name: 'UPI',
       time: ''
     },
-    driver: '',
+    driverName: drivers[0],
     licensePlate: licensePlates[0],
     rideInfo: {
       type: '',
-      distance: '',
-      duration: ''
+      distance: '55',
+      duration: '120',
+      tripDate: today,
+      tripTime: ''
     },
     pickup: {
-      address: ''
+      address: 'Terminal 1, Bengaluru Airport'
     },
     dropoff: {
-      address: ''
+      address: 'Terminal 1, Bengaluru Airport'
     }
   });
 
@@ -60,6 +68,11 @@ const InputForm = ({ onSubmit }) => {
           ...prev[parent],
           [child]: value
         }
+      }));
+    } else if (name === 'driverName') {
+      setFormData(prev => ({
+        ...prev,
+        driverName: value
       }));
     } else {
       setFormData(prev => ({
@@ -165,15 +178,21 @@ const InputForm = ({ onSubmit }) => {
           </div>
 
           {/* Driver Details */}
-          <div className="form-group required">
-            <label>Driver Name:</label>
-            <input
-              type="text"
-              name="driver"
-              value={formData.driver}
+          <div className="form-group">
+            <label htmlFor="driverName">Driver</label>
+            <select
+              id="driverName"
+              name="driverName"
+              value={formData.driverName}
               onChange={handleChange}
               required
-            />
+            >
+              {drivers.map(driver => (
+                <option key={driver} value={driver}>
+                  {driver}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="form-group required">
             <label>License Plate:</label>
@@ -193,17 +212,7 @@ const InputForm = ({ onSubmit }) => {
           </div>
 
           {/* Ride Information */}
-          <div className="form-group required">
-            <label>Ride Type:</label>
-            <input
-              type="text"
-              name="rideInfo.type"
-              value={formData.rideInfo.type}
-              onChange={handleChange}
-              placeholder="e.g., Moto Saver, Malama GSTGo"
-              required
-            />
-          </div>
+        
           <div className="form-group required">
             <label>Distance (km):</label>
             <input
@@ -221,6 +230,28 @@ const InputForm = ({ onSubmit }) => {
               type="number"
               name="rideInfo.duration"
               value={formData.rideInfo.duration}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group required">
+            <label>Trip Date:</label>
+            <input
+              type="date"
+              name="rideInfo.tripDate"
+              value={formData.rideInfo.tripDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group required">
+            <label>Trip Time:</label>
+            <input
+              type="time"
+              name="rideInfo.tripTime"
+              value={formData.rideInfo.tripTime}
               onChange={handleChange}
               required
             />

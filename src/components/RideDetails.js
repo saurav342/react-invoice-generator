@@ -16,12 +16,12 @@ const RideDetails = ({ driver, licensePlate, rideInfo, pickup, dropoff }) => {
       <div className="location-details">
         <div className="location pickup">
           <span className="time">{pickup.time}</span>
-          <span className="address">{pickup.address}</span>
+         Pickup Address: <span className="address">{pickup.address}</span>
         </div>
         
         <div className="location dropoff">
           <span className="time">{dropoff.time}</span>
-          <span className="address">{dropoff.address}</span>
+         Drop Address: <span className="address">{dropoff.address}</span>
         </div>
       </div>
     </div>
