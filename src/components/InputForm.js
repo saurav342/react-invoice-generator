@@ -13,7 +13,7 @@ const InputForm = ({ onSubmit }) => {
     'KA51AK9053'
   ];
 
-  const drivers = ["Chandan Kumar", "Jabed Lashkar",  "Muni Raju", "Bhagath Reddy"];
+  const drivers = ["Chandan Kumar", "Jabed Lashkar",  "Muni Raju", "Bhagath Reddy", "Dharshan Gowda"];
 
   const initialTotal = 599;
   const initialBase = (initialTotal / 1.05).toFixed(2);
